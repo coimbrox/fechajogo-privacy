@@ -1,0 +1,1 @@
+# fechajogo-privacy
