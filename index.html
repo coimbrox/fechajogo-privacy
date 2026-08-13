@@ -3,91 +3,639 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Política de Privacidade — FechaJogo</title>
+<title>FechaJogo — Encontre e feche partidas de futevôlei, vôlei de areia e beach tênis</title>
+<meta name="description" content="Chega de grupo de zap que nunca fecha o jogo. O FechaJogo mostra partidas abertas de futevôlei, vôlei de areia e beach tênis perto de você — ou deixa você criar a sua em segundos.">
+<meta name="theme-color" content="#006D77">
+<link rel="canonical" href="https://coimbrox.github.io/FechaJogo/">
+<link rel="icon" href="images/icon.png" type="image/png">
+<link rel="apple-touch-icon" href="images/icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FechaJogo">
+<meta property="og:title" content="FechaJogo — Feche sua partida perto de você">
+<meta property="og:description" content="Encontre e feche partidas de futevôlei, vôlei de areia e beach tênis perto de você. Sem grupo de zap, sem enrolação.">
+<meta property="og:url" content="https://coimbrox.github.io/FechaJogo/">
+<meta property="og:image" content="https://coimbrox.github.io/FechaJogo/images/play-store-feature-graphic.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="Logo do FechaJogo com o texto Feche sua partida perto de você — Futevôlei, Vôlei de areia, Beach tênis">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FechaJogo — Feche sua partida perto de você">
+<meta name="twitter:description" content="Encontre e feche partidas de futevôlei, vôlei de areia e beach tênis perto de você.">
+<meta name="twitter:image" content="https://coimbrox.github.io/FechaJogo/images/play-store-feature-graphic.png">
+
 <style>
-  :root { color-scheme: light dark; }
+  :root {
+    --brand: #006D77;
+    --brand-600: #00565d;
+    --brand-100: #E1F0F1;
+    --brand-50: #EFF8F8;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --ink: #10262A;
+    --ink-muted: #55696D;
+    --border: #E3E9EA;
+    --radius-lg: 16px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 2px 10px rgba(0, 50, 55, .07);
+    --shadow-md: 0 12px 28px rgba(0, 50, 55, .12);
+    --container: 1180px;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+
   body {
+    margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    max-width: 760px;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  h1, h2, h3 { font-weight: 700; line-height: 1.2; margin: 0 0 .5em; }
+  h1 { font-size: clamp(1.9rem, 5vw + 1rem, 3.1rem); letter-spacing: -.02em; }
+  h2 { font-size: clamp(1.5rem, 3vw + 1rem, 2.2rem); letter-spacing: -.01em; }
+  h3 { font-size: 1.1rem; }
+  p { margin: 0 0 1em; color: var(--ink-muted); }
+
+  a { color: var(--brand); }
+
+  .container {
+    max-width: var(--container);
     margin: 0 auto;
-    padding: 32px 20px 64px;
-    line-height: 1.6;
-    color: #1a1a1a;
+    padding: 0 20px;
+  }
+
+  .section { padding: 64px 0; }
+  .section-alt { background: var(--brand-50); }
+  .eyebrow {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: .8rem;
+    letter-spacing: .08em;
+    color: var(--brand);
+    margin: 0 0 .75em;
+  }
+  .section-lead { max-width: 640px; font-size: 1.05rem; }
+
+  /* Buttons & chips */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 15px 30px;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: var(--shadow-sm); }
+  .btn-primary:hover { background: var(--brand-600); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-outline { background: #fff; color: var(--brand); border-color: var(--brand); }
+  .btn-outline:hover { background: var(--brand-50); }
+  .btn-disabled {
+    background: #EDF1F2; color: #8B999C; cursor: not-allowed; border-color: transparent;
+  }
+  .btn-sm { padding: 10px 22px; font-size: .9rem; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    background: var(--brand-100);
+    color: var(--brand-600);
+    font-weight: 600;
+    font-size: .78rem;
+  }
+  .chip-active { background: var(--brand); color: #fff; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+  }
+
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(248, 250, 252, .92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+  .brand-logo { width: 38px; height: 38px; border-radius: 10px; }
+  .brand-name { font-weight: 700; font-size: 1.15rem; letter-spacing: -.01em; }
+
+  .nav-desktop { display: none; align-items: center; gap: 28px; }
+  .nav-desktop a:not(.btn) { color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .nav-desktop a:not(.btn):hover { color: var(--brand); }
+
+  .nav-mobile { position: relative; }
+  .nav-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border);
     background: #fff;
   }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e8e8e8; background: #121212; }
-    a { color: #7cb8ff; }
+  .nav-mobile summary::-webkit-details-marker { display: none; }
+  .nav-mobile summary::before { content: "☰"; font-size: 1.1rem; color: var(--brand); }
+  .nav-mobile[open] summary::before { content: "✕"; }
+  .nav-mobile-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
   }
-  h1 { font-size: 1.6rem; margin-bottom: 4px; }
-  h2 { font-size: 1.15rem; margin-top: 2em; }
-  .updated { color: #767676; font-size: 0.9rem; margin-bottom: 2em; }
-  ul { padding-left: 1.3em; }
-  li { margin-bottom: 0.4em; }
-  code { background: rgba(127,127,127,0.15); padding: 0.1em 0.4em; border-radius: 4px; }
+  .nav-mobile-panel a {
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .nav-mobile-panel a:hover { background: var(--brand-50); color: var(--brand); }
+
+  @media (min-width: 820px) {
+    .nav-desktop { display: flex; }
+    .nav-mobile { display: none; }
+  }
+
+  /* Hero */
+  .hero { padding: 48px 0 32px; overflow: hidden; }
+  .hero-grid { display: grid; gap: 40px; align-items: center; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin: 28px 0 14px; }
+  .hero-note { font-size: .85rem; color: var(--ink-muted); }
+  .lead { font-size: 1.1rem; }
+
+  @media (min-width: 960px) {
+    .hero-grid { grid-template-columns: 1.05fr .95fr; }
+  }
+
+  /* Phone mockup */
+  .phone-mockup { display: flex; justify-content: center; }
+  .phone-frame {
+    width: min(300px, 78vw);
+    background: var(--ink);
+    border-radius: 34px;
+    padding: 12px;
+    box-shadow: var(--shadow-md);
+  }
+  .phone-screen {
+    background: var(--bg);
+    border-radius: 24px;
+    padding: 18px 14px 22px;
+    position: relative;
+    min-height: 480px;
+  }
+  .mock-topbar { text-align: center; margin-bottom: 14px; }
+  .mock-title { font-weight: 700; font-size: .95rem; }
+  .mock-search {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 10px 14px;
+    font-size: .78rem;
+    color: var(--brand);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .mock-chips { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .mock-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .mock-card-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .chip-sm { padding: 4px 10px; font-size: .68rem; }
+  .mock-distance { font-size: .72rem; color: var(--ink-muted); font-weight: 600; }
+  .mock-card-title { font-weight: 700; font-size: .88rem; margin: 4px 0 2px; color: var(--ink); }
+  .mock-card-sub { font-size: .76rem; color: var(--ink-muted); margin: 0 0 8px; }
+  .mock-vagas { font-size: .72rem; font-weight: 700; color: var(--brand-600); }
+  .mock-join {
+    background: var(--brand);
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+  .mock-fab {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Sports grid */
+  .sports-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 36px 0 48px;
+  }
+  @media (min-width: 640px) {
+    .sports-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .sport-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    text-align: center;
+  }
+  .sport-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--brand-100);
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .sport-icon svg { width: 32px; height: 32px; }
+  .sport-card h3 { margin: 0; }
+
+  /* Steps */
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px; max-width: 720px; }
+  .step { display: flex; gap: 18px; align-items: flex-start; }
+  .step-number {
+    flex: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step h3 { margin: 0 0 .3em; }
+  .step p { margin: 0; }
+
+  /* Confiabilidade */
+  .confiabilidade-grid { display: grid; gap: 40px; align-items: center; }
+  @media (min-width: 900px) {
+    .confiabilidade-grid { grid-template-columns: 1.1fr .9fr; }
+  }
+  .reliability-card-wrap { display: flex; justify-content: center; }
+  .reliability-card { width: min(320px, 100%); text-align: center; }
+  .reliability-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--brand); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; margin: 0 auto 12px; font-size: 1rem;
+  }
+  .reliability-name { font-weight: 700; color: var(--ink); margin: 0 0 2px; }
+  .reliability-level { font-size: .85rem; margin: 0 0 16px; }
+  .reliability-bar {
+    height: 10px;
+    background: var(--brand-100);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .reliability-fill { height: 100%; background: var(--brand); border-radius: var(--radius-pill); }
+  .reliability-pct { font-weight: 700; font-size: .88rem; color: var(--brand-600); }
+  .reliability-caption { font-size: .72rem; color: var(--ink-muted); margin: 14px 0 0; }
+
+  /* Privacy */
+  .privacy-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 28px 0; }
+  @media (min-width: 640px) {
+    .privacy-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .privacy-link { margin-top: 8px; }
+
+  /* Final CTA */
+  .cta-final { background: var(--brand); color: #fff; text-align: center; }
+  .cta-final h2 { color: #fff; }
+  .cta-final p { color: rgba(255, 255, 255, .85); }
+  .cta-final-inner { max-width: 640px; margin: 0 auto; }
+  .cta-buttons { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 26px 0 18px; }
+  .cta-final .btn-primary { background: #fff; color: var(--brand); }
+  .cta-final .btn-primary:hover { background: #EAF6F6; }
+  .cta-final .btn-disabled { background: rgba(255, 255, 255, .15); color: rgba(255, 255, 255, .7); }
+  .cta-feedback { font-size: .9rem; }
+  .cta-feedback a { color: #fff; text-decoration: underline; }
+
+  /* Footer */
+  .site-footer { padding: 32px 0; border-top: 1px solid var(--border); }
+  .footer-inner {
+    display: flex; flex-direction: column; gap: 12px;
+    font-size: .85rem; color: var(--ink-muted);
+  }
+  .footer-inner nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  .footer-inner nav a { color: var(--ink-muted); text-decoration: none; }
+  .footer-inner nav a:hover { color: var(--brand); text-decoration: underline; }
+  @media (min-width: 640px) {
+    .footer-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  .btn:focus-visible {
+    outline: 3px solid var(--brand-600);
+    outline-offset: 2px;
+  }
 </style>
 </head>
 <body>
-  <h1>Política de Privacidade — FechaJogo</h1>
-  <p class="updated">Última atualização: 12 de agosto de 2026.</p>
 
-  <p>
-    O FechaJogo é um aplicativo para encontrar e organizar partidas de futevôlei,
-    vôlei de areia e beach tênis. Esta política explica quais dados coletamos,
-    para quê e como você pode excluí-los.
-  </p>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img class="brand-logo" src="images/icon.png" alt="" width="1024" height="1024">
+      <span class="brand-name">FechaJogo</span>
+    </a>
 
-  <h2>Dados que coletamos</h2>
-  <ul>
-    <li><strong>Cadastro:</strong> nome e e-mail, usados para criar e autenticar sua conta.</li>
-    <li><strong>Perfil:</strong> cidade, bairro, esportes e nível de jogo, disponibilidade
-      por dia/horário — usados para exibir seu perfil a outros jogadores e sugerir partidas.</li>
-    <li><strong>Localização:</strong> latitude/longitude do seu dispositivo, coletada apenas
-      quando você toca em "usar minha localização" ou ativa a busca "perto de mim". Usada
-      unicamente para calcular distância até partidas próximas; não é coletada em segundo plano.</li>
-    <li><strong>Partidas e chat:</strong> partidas que você cria ou participa, mensagens
-      enviadas no chat de cada partida, confirmação de presença e avaliações de
-      confiabilidade após o jogo.</li>
-  </ul>
+    <nav class="nav-desktop" aria-label="Navegação principal">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#confiabilidade">Confiabilidade</a>
+      <a href="#privacidade">Privacidade</a>
+      <a href="#baixar" class="btn btn-primary btn-sm">Baixar</a>
+    </nav>
 
-  <h2>Como os dados são usados</h2>
-  <p>
-    Exclusivamente para o funcionamento do app: encontrar jogadores e partidas
-    compatíveis, permitir comunicação entre participantes de uma mesma partida, e
-    calcular a pontuação de confiabilidade (presença/no-show). Não vendemos nem
-    compartilhamos seus dados com terceiros para fins de publicidade.
-  </p>
+    <details class="nav-mobile">
+      <summary aria-label="Abrir menu de navegação"></summary>
+      <nav class="nav-mobile-panel" aria-label="Navegação principal">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#confiabilidade">Confiabilidade</a>
+        <a href="#privacidade">Privacidade</a>
+        <a href="#baixar">Baixar</a>
+      </nav>
+    </details>
+  </div>
+</header>
 
-  <h2>Onde os dados ficam armazenados</h2>
-  <p>
-    Os dados são armazenados no <a href="https://supabase.com" target="_blank" rel="noopener">Supabase</a>,
-    nosso provedor de banco de dados e autenticação, que atua como operador dos dados
-    em nosso nome.
-  </p>
+<main id="top">
 
-  <h2>Exclusão de conta e dados</h2>
-  <p>
-    Você pode excluir sua conta a qualquer momento pelo próprio app, em
-    <strong>Perfil → Excluir minha conta</strong>. Isso apaga permanentemente seu
-    perfil, as partidas que você criou, suas mensagens e avaliações. A ação não
-    pode ser desfeita.
-  </p>
-  <p>
-    Também é possível solicitar a exclusão dos dados por e-mail, em
-    <a href="mailto:coimbrawebs@gmail.com">coimbrawebs@gmail.com</a>.
-  </p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Futevôlei · Vôlei de areia · Beach tênis</p>
+        <h1>Chega de grupo de zap que nunca fecha a partida</h1>
+        <p class="lead">
+          O FechaJogo mostra as partidas abertas perto de você — filtradas por esporte e nível.
+          Não achou nenhuma? Crie a sua em segundos e deixe outros jogadores entrarem.
+        </p>
+        <div class="hero-ctas">
+          <a href="#baixar" class="btn btn-primary">Baixar o app</a>
+          <a href="#como-funciona" class="btn btn-outline">Ver como funciona</a>
+        </div>
+        <p class="hero-note">Disponível para Android · beta fechado</p>
+      </div>
 
-  <h2>Permissões do dispositivo</h2>
-  <p>
-    O app solicita permissão de localização (<code>ACCESS_FINE_LOCATION</code> /
-    <code>ACCESS_COARSE_LOCATION</code>) apenas para a busca de partidas por
-    proximidade e para preencher sua localização de perfil, sempre por ação
-    explícita sua — nunca em segundo plano.
-  </p>
+      <div class="phone-mockup" role="img" aria-label="Ilustração da tela de busca de partidas do FechaJogo, com filtros por esporte e nível e uma lista de partidas próximas com vagas disponíveis">
+        <div class="phone-frame" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="mock-topbar"><span class="mock-title">Partidas perto de você</span></div>
+            <div class="mock-search">📍 Usar minha localização</div>
+            <div class="mock-chips">
+              <span class="chip chip-active">Futevôlei</span>
+              <span class="chip">Vôlei de areia</span>
+              <span class="chip">Beach tênis</span>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-row">
+                <span class="chip chip-sm">Futevôlei</span>
+                <span class="mock-distance">1,2 km</span>
+              </div>
+              <p class="mock-card-title">Praia do Futuro — Quadra 3</p>
+              <p class="mock-card-sub">Hoje, 18h · Nível intermediário</p>
+              <div class="mock-card-row">
+                <span class="mock-vagas">3 vagas</span>
+                <span class="mock-join">Entrar</span>
+              </div>
+            </div>
+            <div class="mock-card">
+              <div class="mock-card-row">
+                <span class="chip chip-sm">Vôlei de areia</span>
+                <span class="mock-distance">2,8 km</span>
+              </div>
+              <p class="mock-card-title">Arena Beach Sports</p>
+              <p class="mock-card-sub">Amanhã, 09h · Nível iniciante</p>
+              <div class="mock-card-row">
+                <span class="mock-vagas">5 vagas</span>
+                <span class="mock-join">Entrar</span>
+              </div>
+            </div>
+            <div class="mock-fab" aria-hidden="true">+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h2>Contato</h2>
-  <p>
-    Dúvidas sobre esta política ou sobre seus dados: <a href="mailto:coimbrawebs@gmail.com">coimbrawebs@gmail.com</a>.
-  </p>
+  <!-- Como funciona -->
+  <section id="como-funciona" class="section">
+    <div class="container">
+      <p class="eyebrow">Como funciona</p>
+      <h2>Três esportes de praia, um jeito simples de fechar o jogo</h2>
+      <p class="section-lead">
+        Do perfil à quadra em quatro passos — sem depender de ninguém confirmar no grupo.
+      </p>
+
+      <div class="sports-grid">
+        <div class="sport-card">
+          <div class="sport-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="15" r="8"/>
+              <path d="M18.5 13c1.6-1.8 3.9-1.8 5.5 0M20 19c1.8 1.4 3.7 1.4 5.5 0M25.5 10.5c1.6.9 2.2 3 1.2 5"/>
+              <path d="M8 39h32M14 30v9M34 30v9M14 30h20"/>
+            </svg>
+          </div>
+          <h3>Futevôlei</h3>
+        </div>
+        <div class="sport-card">
+          <div class="sport-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="19" r="12"/>
+              <path d="M24 7c4.5 4 4.5 21 0 25M12 19c4.5-4 19.5-4 24 0M14.3 11.3c5.2 5.2 14.2 5.2 19.4 0M14.3 26.7c5.2-5.2 14.2-5.2 19.4 0"/>
+              <path d="M6 40c6-4 30-4 36 0"/>
+            </svg>
+          </div>
+          <h3>Vôlei de areia</h3>
+        </div>
+        <div class="sport-card">
+          <div class="sport-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="17" cy="16" r="10"/>
+              <path d="M10.5 10.5l13 11M10.5 21.5l13-11M17 6.3v19.4M7.3 16h19.4"/>
+              <path d="M17.5 26.5l4.5 4.5M23.5 32.5l7 7"/>
+              <circle cx="39" cy="13" r="3.2"/>
+            </svg>
+          </div>
+          <h3>Beach tênis</h3>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-number" aria-hidden="true">1</span>
+          <div>
+            <h3>Monte seu perfil</h3>
+            <p>Escolha os esportes que você joga e seu nível: iniciante, intermediário ou avançado.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-number" aria-hidden="true">2</span>
+          <div>
+            <h3>Busque partidas perto de você</h3>
+            <p>Filtre por esporte e nível, use "perto de mim" ou digite a cidade — tem autocomplete de município.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-number" aria-hidden="true">3</span>
+          <div>
+            <h3>Não achou? Crie a sua</h3>
+            <p>Defina o local (com foto opcional da quadra), data, horário e de 2 a 16 vagas. Dá pra deixar observações, tipo "leve sua bola" ou "tem raquete emprestada no local".</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-number" aria-hidden="true">4</span>
+          <div>
+            <h3>Entre, converse e jogue</h3>
+            <p>Participe de partidas de outras pessoas e combine os detalhes no chat da partida. O local abre direto no Google Maps.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Confiabilidade -->
+  <section id="confiabilidade" class="section section-alt">
+    <div class="container confiabilidade-grid">
+      <div>
+        <p class="eyebrow">O diferencial do FechaJogo</p>
+        <h2>Combinou, confirma — e isso fica registrado</h2>
+        <p>
+          Depois da partida, todo mundo confirma presença e avalia se os outros participantes
+          realmente apareceram. Isso gera uma <strong>pontuação de confiabilidade pública</strong>
+          no perfil de cada jogador.
+        </p>
+        <p>
+          É a resposta direta pro maior problema de organizar jogo por grupo de zap: gente que
+          marca e não aparece. Antes de entrar numa partida, você já sabe com quem está combinando.
+        </p>
+      </div>
+
+      <div class="reliability-card-wrap">
+        <div class="card reliability-card" role="img" aria-label="Ilustração de um perfil de jogador com pontuação de confiabilidade de 92 por cento">
+          <div class="reliability-avatar" aria-hidden="true">MS</div>
+          <p class="reliability-name">Exemplo de perfil</p>
+          <p class="reliability-level">Vôlei de areia · Intermediário</p>
+          <div class="reliability-score" aria-hidden="true">
+            <div class="reliability-bar"><div class="reliability-fill" style="width:92%"></div></div>
+            <span class="reliability-pct">92% de presença confirmada</span>
+          </div>
+          <p class="reliability-caption">Ilustração da interface do app — não são dados reais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TODO: adicionar depoimentos reais depois do beta -->
+
+  <!-- Privacidade -->
+  <section id="privacidade" class="section">
+    <div class="container privacy-block">
+      <p class="eyebrow">Privacidade</p>
+      <h2>Sua localização, suas regras</h2>
+      <div class="privacy-grid">
+        <div class="card">
+          <h3>Localização só quando você pede</h3>
+          <p>O FechaJogo só acessa sua localização quando você toca em "usar minha localização" ou busca partidas "perto de mim". Nada de rastreamento em segundo plano.</p>
+        </div>
+        <div class="card">
+          <h3>Exclua quando quiser</h3>
+          <p>Sua conta e seus dados podem ser apagados a qualquer momento, direto no app — sem precisar abrir chamado nem esperar resposta.</p>
+        </div>
+      </div>
+      <p class="privacy-link"><a href="https://coimbrox.github.io/FechaJogo/privacy.html" class="btn btn-outline">Ler a política de privacidade</a></p>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section id="baixar" class="section cta-final">
+    <div class="container cta-final-inner">
+      <h2>Pronto pra fechar sua próxima partida?</h2>
+      <p>Baixe o FechaJogo e encontre futevôlei, vôlei de areia ou beach tênis perto de você.</p>
+      <div class="cta-buttons">
+        <!-- TODO: link da Play Store -->
+        <a href="#" class="btn btn-primary">Baixar na Play Store</a>
+        <span class="btn btn-disabled" aria-disabled="true">App Store — em breve</span>
+      </div>
+      <p class="cta-feedback">Tem sugestão ou encontrou um bug? Manda pra <a href="mailto:coimbrawebs@gmail.com">coimbrawebs@gmail.com</a>.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2026 FechaJogo. Todos os direitos reservados.</p>
+    <nav aria-label="Links do rodapé">
+      <a href="mailto:coimbrawebs@gmail.com">coimbrawebs@gmail.com</a>
+      <a href="https://coimbrox.github.io/FechaJogo/privacy.html">Política de privacidade</a>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>
