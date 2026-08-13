@@ -394,6 +394,25 @@
   .cta-feedback { font-size: .9rem; }
   .cta-feedback a { color: #fff; text-decoration: underline; }
 
+  .beta-form { margin: 28px auto 4px; max-width: 460px; text-align: left; }
+  .beta-label { display: block; font-weight: 600; font-size: .9rem; color: #fff; margin-bottom: 10px; }
+  .beta-form-row { display: flex; flex-direction: column; gap: 10px; }
+  @media (min-width: 520px) {
+    .beta-form-row { flex-direction: row; }
+  }
+  .beta-input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px 18px;
+    border-radius: var(--radius-pill);
+    border: none;
+    font-size: .95rem;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .beta-input:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .beta-note { font-size: .78rem; color: rgba(255, 255, 255, .75); margin: 10px 0 0; }
+
   /* Footer */
   .site-footer { padding: 32px 0; border-top: 1px solid var(--border); }
   .footer-inner {
@@ -669,10 +688,20 @@
       <h2>Pronto pra fechar sua próxima partida?</h2>
       <p>Baixe o FechaJogo e encontre futevôlei, vôlei de areia ou beach tênis perto de você.</p>
       <div class="cta-buttons">
-        <!-- TODO: link da Play Store -->
-        <a href="#" class="btn btn-primary">Baixar na Play Store</a>
+        <a href="https://play.google.com/apps/testing/com.fechajogo.app" class="btn btn-primary" target="_blank" rel="noopener">Entrar no beta (Android)</a>
         <span class="btn btn-disabled" aria-disabled="true">App Store — em breve</span>
       </div>
+      <p class="cta-feedback">Já é beta tester? <a href="https://play.google.com/store/apps/details?id=com.fechajogo.app" target="_blank" rel="noopener">Abra direto na Play Store</a>.</p>
+
+      <form class="beta-form" id="beta-form">
+        <label for="beta-email" class="beta-label">Prefere só deixar seu e-mail? A gente te ajuda a entrar na lista de testadores.</label>
+        <div class="beta-form-row">
+          <input type="email" id="beta-email" name="email" required placeholder="seuemail@exemplo.com" class="beta-input" aria-label="Seu e-mail">
+          <button type="submit" class="btn btn-outline btn-sm">Quero ser testador</button>
+        </div>
+        <p class="beta-note" id="beta-note">Vamos abrir seu e-mail com uma mensagem pronta pra gente — é só confirmar o envio.</p>
+      </form>
+
       <p class="cta-feedback">Tem sugestão ou encontrou um bug? Manda pra <a href="mailto:coimbrawebs@gmail.com">coimbrawebs@gmail.com</a>.</p>
     </div>
   </section>
@@ -688,6 +717,18 @@
     </nav>
   </div>
 </footer>
+
+<script>
+  document.getElementById('beta-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email = document.getElementById('beta-email').value.trim();
+    if (!email) return;
+    var subject = encodeURIComponent('Quero participar do beta do FechaJogo');
+    var body = encodeURIComponent('Meu e-mail para a lista de testadores: ' + email);
+    document.getElementById('beta-note').textContent = 'Abrindo seu e-mail com a mensagem pronta — é só confirmar o envio.';
+    window.location.href = 'mailto:coimbrawebs@gmail.com?subject=' + subject + '&body=' + body;
+  });
+</script>
 
 </body>
 </html>
