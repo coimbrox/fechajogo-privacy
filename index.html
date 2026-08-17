@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FechaJogo — Encontre e feche partidas de futevôlei, vôlei de areia e beach tênis</title>
-<meta name="description" content="Chega de grupo de zap que nunca fecha o jogo. O FechaJogo mostra partidas abertas de futevôlei, vôlei de areia e beach tênis perto de você ou deixa você criar a sua em segundos.">
+<title>FechaJogo — Encontre e feche partidas de futevôlei, vôlei de areia, beach tênis e padel</title>
+<meta name="description" content="Chega de grupo de zap que nunca fecha o jogo. O FechaJogo mostra partidas abertas de futevôlei, vôlei de areia, beach tênis e padel perto de você ou deixa você criar a sua em segundos.">
 <meta name="theme-color" content="#006D77">
 <link rel="canonical" href="https://fechajogo.vercel.app/">
 <link rel="icon" href="images/icon.png" type="image/png">
@@ -13,15 +13,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FechaJogo">
 <meta property="og:title" content="FechaJogo — Feche sua partida perto de você">
-<meta property="og:description" content="Encontre e feche partidas de futevôlei, vôlei de areia e beach tênis perto de você. Sem grupo de zap, sem enrolação.">
+<meta property="og:description" content="Encontre e feche partidas de futevôlei, vôlei de areia, beach tênis e padel perto de você. Sem grupo de zap, sem enrolação.">
 <meta property="og:url" content="https://fechajogo.vercel.app/">
 <meta property="og:image" content="https://fechajogo.vercel.app/images/play-store-feature-graphic.png">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="500">
-<meta property="og:image:alt" content="Logo do FechaJogo com o texto Feche sua partida perto de você — Futevôlei, Vôlei de areia, Beach tênis">
+<meta property="og:image:alt" content="Logo do FechaJogo com o texto Feche sua partida perto de você — Futevôlei, Vôlei de areia, Beach tênis, Padel">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FechaJogo — Feche sua partida perto de você">
-<meta name="twitter:description" content="Encontre e feche partidas de futevôlei, vôlei de areia e beach tênis perto de você.">
+<meta name="twitter:description" content="Encontre e feche partidas de futevôlei, vôlei de areia, beach tênis e padel perto de você.">
 <meta name="twitter:image" content="https://fechajogo.vercel.app/images/play-store-feature-graphic.png">
 
 <style>
@@ -287,7 +287,7 @@
     margin: 36px 0 48px;
   }
   @media (min-width: 640px) {
-    .sports-grid { grid-template-columns: repeat(3, 1fr); }
+    .sports-grid { grid-template-columns: repeat(4, 1fr); }
   }
   .sport-card {
     background: #fff;
@@ -475,7 +475,7 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">Futevôlei · Vôlei de areia · Beach tênis</p>
+        <p class="eyebrow">Futevôlei · Vôlei de areia · Beach tênis · Padel</p>
         <h1>Chega de grupo de zap que nunca fecha a partida</h1>
         <p class="lead">
           O FechaJogo mostra as partidas abertas perto de você, filtradas por esporte e nível.
@@ -497,6 +497,7 @@
               <span class="chip chip-active">Futevôlei</span>
               <span class="chip">Vôlei de areia</span>
               <span class="chip">Beach tênis</span>
+              <span class="chip">Padel</span>
             </div>
             <div class="mock-card">
               <div class="mock-card-row">
@@ -533,7 +534,7 @@
   <section id="como-funciona" class="section">
     <div class="container">
       <p class="eyebrow">Como funciona</p>
-      <h2>Três esportes de praia, um jeito simples de fechar o jogo</h2>
+      <h2>Quatro esportes, um jeito simples de fechar o jogo</h2>
       <p class="section-lead">
         Do perfil à quadra em quatro passos, sem depender de ninguém confirmar no grupo.
       </p>
@@ -569,6 +570,16 @@
             </svg>
           </div>
           <h3>Beach tênis</h3>
+        </div>
+        <div class="sport-card">
+          <div class="sport-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="12" y="5" width="24" height="30" rx="12"/>
+              <path d="M18 14h12M18 20h12M18 26h12"/>
+              <path d="M24 35v9M18 44h12"/>
+            </svg>
+          </div>
+          <h3>Padel</h3>
         </div>
       </div>
 
@@ -714,7 +725,7 @@
   <section id="baixar" class="section cta-final">
     <div class="container cta-final-inner">
       <h2>Pronto pra fechar sua próxima partida?</h2>
-      <p>Baixe o FechaJogo e encontre futevôlei, vôlei de areia ou beach tênis perto de você.</p>
+      <p>Baixe o FechaJogo e encontre futevôlei, vôlei de areia, beach tênis ou padel perto de você.</p>
       <div class="cta-buttons">
         <a href="https://play.google.com/apps/testing/com.fechajogo.app" class="btn btn-primary" target="_blank" rel="noopener">Entrar no beta (Android)</a>
         <span class="btn btn-disabled" aria-disabled="true">App Store — em breve</span>
