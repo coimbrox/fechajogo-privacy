@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/match/:id*",
+      "destination": "/index.html"
+    }
+  ]
+}

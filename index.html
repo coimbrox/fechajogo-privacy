@@ -24,6 +24,41 @@
 <meta name="twitter:description" content="Encontre e feche partidas de futevôlei, vôlei de areia, beach tênis e padel perto de você.">
 <meta name="twitter:image" content="https://fechajogo.vercel.app/images/play-store-feature-graphic.png">
 
+<!-- Script de Deep Link para abrir partidas compartilhadas -->
+<script>
+  (function () {
+    var path = window.location.pathname;
+    if (path.indexOf('/match/') === 0) {
+      var parts = path.split('/').filter(Boolean);
+      var matchId = parts[parts.length - 1];
+
+      if (matchId && matchId !== 'match') {
+        var appUri = 'io.supabase.fechajogo://match/' + matchId;
+
+        // Tenta abrir o app nativo imediatamente no celular
+        window.location.href = appUri;
+
+        // Cria um banner amigável no topo caso o app não abra
+        document.addEventListener('DOMContentLoaded', function () {
+          var banner = document.createElement('div');
+          banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#006D77;color:#fff;padding:16px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.3);font-family:-apple-system,BlinkMacSystemFont,sans-serif;';
+          banner.innerHTML = `
+            <div style="max-width:500px;margin:0 auto;">
+              <strong style="font-size:1.1rem;display:block;margin-bottom:6px;">Bora Jogar? 🏐</strong>
+              <p style="margin:0 0 12px;color:rgba(255,255,255,0.9);font-size:0.9rem;">Você recebeu um convite para uma partida no FechaJogo!</p>
+              <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                <a href="${appUri}" style="background:#fff;color:#006D77;padding:10px 18px;border-radius:999px;font-weight:700;text-decoration:none;font-size:0.9rem;">Abrir no App</a>
+                <a href="https://play.google.com/apps/testing/com.fechajogo.app" target="_blank" style="background:rgba(255,255,255,0.2);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;text-decoration:none;font-size:0.9rem;">Baixar no Android</a>
+              </div>
+            </div>
+          `;
+          document.body.prepend(banner);
+        });
+      }
+    }
+  })();
+</script>
+
 <style>
   :root {
     --brand: #006D77;
@@ -595,21 +630,21 @@
           <span class="step-number" aria-hidden="true">2</span>
           <div>
             <h3>Busque partidas perto de você</h3>
-            <p>Filtre por esporte e nível, use "perto de mim" ou digite a cidade — tem autocomplete de município.</p>
+            <p>Filtre por esporte e nível, ajuste o raio de busca (5km a 100km) ou digite a cidade.</p>
           </div>
         </li>
         <li class="step">
           <span class="step-number" aria-hidden="true">3</span>
           <div>
             <h3>Não achou? Crie a sua</h3>
-            <p>Defina o local (com foto opcional da quadra), data, horário e de 2 a 16 vagas. Dá pra deixar observações, tipo "leve sua bola" ou "tem raquete emprestada no local".</p>
+            <p>Defina o local (com foto opcional da quadra), data, horário, modalidade (casual ou competitiva 2x2) e quantidade de vagas.</p>
           </div>
         </li>
         <li class="step">
           <span class="step-number" aria-hidden="true">4</span>
           <div>
             <h3>Entre, converse e jogue</h3>
-            <p>Participe de partidas de outras pessoas e combine os detalhes no chat da partida. O local abre direto no Google Maps.</p>
+            <p>Participe de partidas, escolha seu time, acompanhe o placar ao vivo e combine os detalhes no chat. Compartilhe o link direto do jogo com a galera!</p>
           </div>
         </li>
       </ol>
@@ -628,8 +663,7 @@
           no perfil de cada jogador.
         </p>
         <p>
-          É a resposta direta pro maior problema de organizar jogo por grupo de zap: gente que
-          marca e não aparece. Antes de entrar numa partida, você já sabe com quem está combinando.
+          Em partidas competitivas, o resultado e placar são confirmados por ambos os times e alimentam o <strong>Ranking Oficial</strong> e seu histórico pessoal de jogos.
         </p>
       </div>
 
@@ -647,8 +681,6 @@
       </div>
     </div>
   </section>
-
-  <!-- TODO: adicionar depoimentos reais depois do beta -->
 
   <!-- Privacidade -->
   <section id="privacidade" class="section">
@@ -674,58 +706,57 @@
     <div class="container">
       <p class="eyebrow">Notas de versão</p>
       <h2>O que já mudou em cada versão</h2>
-      <p class="section-lead">Já estamos na v0.4.0 no teste fechado do Google Play — acompanhe aqui as novidades de cada versão.</p>
+      <p class="section-lead">Acompanhe as novidades e melhorias contínuas do FechaJogo no Google Play.</p>
 
       <div class="versions-list">
         <div class="card version-card">
           <div class="version-card-head">
-            <span class="chip chip-active">v0.4.0 · no teste fechado</span>
+            <span class="chip chip-active">v0.13.2 · versão atual</span>
           </div>
-          <h3>Times e placar ao vivo</h3>
+          <h3>Deep Links e Estabilidade</h3>
           <ul class="update-list">
-            <li>Escolha seu time, o líder inicia a partida e todo mundo acompanha o placar em tempo real.</li>
-            <li>Correções de estabilidade no login, cadastro e recuperação de senha.</li>
+            <li><strong>Compartilhamento com Deep Link</strong>: ao compartilhar uma partida, um link direto <code>fechajogo.vercel.app/match/...</code> é gerado para abrir o app direto no jogo.</li>
+            <li><strong>Edição de partidas pelo criador</strong>: alteração de horário, local e capacidade com notificação automática para os participantes.</li>
+            <li><strong>Canal de feedback direto</strong>: envie sugestões ou relatos de bugs direto do seu perfil.</li>
+            <li>Melhorias na estabilidade da inicialização e correções gerais.</li>
           </ul>
         </div>
 
         <div class="card version-card">
           <div class="version-card-head">
-            <span class="chip chip-active">v0.3.0 · no teste fechado</span>
+            <span class="chip chip-soft">v0.11.0 – v0.12.0</span>
           </div>
-          <h3>Chegou o Padel e a foto de perfil</h3>
+          <h3>Push Notifications e Tema Escuro</h3>
           <ul class="update-list">
-            <li>Padel agora é um esporte disponível pra criar e buscar partidas, junto com futevôlei, vôlei de areia e beach tênis.</li>
-            <li>Foto de perfil: já dá pra tirar uma foto ou escolher da galeria direto no app.</li>
-            <li>Novos campos de estado e país no perfil — base pro ranking regional que vem a seguir.</li>
+            <li><strong>Push Notifications (FCM)</strong>: receba alertas quando alguém entrar na sua partida, quando ela for alterada/cancelada ou quando chegarem novas mensagens.</li>
+            <li><strong>Dark Mode completo</strong>: suporte nativo ao tema escuro em todas as telas e componentes.</li>
+            <li><strong>Raio de busca ajustável</strong>: escolha a distância das partidas perto de você (5 km a 100 km).</li>
+            <li>Localização pt-BR e paginação com scroll infinito no histórico pessoal de partidas.</li>
           </ul>
         </div>
 
         <div class="card version-card">
           <div class="version-card-head">
-            <span class="chip chip-soft">v0.2.0</span>
+            <span class="chip chip-soft">v0.6.0 – v0.10.0</span>
           </div>
-          <h3>Busca "perto de você" mais precisa e prontos pra Play Store</h3>
+          <h3>Ranking, Modo Competitivo e Login Social</h3>
           <ul class="update-list">
-            <li>Corrigido: partidas sem localização não aparecem mais erradas na busca "perto de mim".</li>
-            <li>Cidade agora com busca e sugestão automática (autocomplete de municípios) ao criar uma partida.</li>
-            <li>Local da partida agora abre direto no Google Maps.</li>
-            <li>Dá pra anexar uma foto da quadra e avisar o que levar (bola, raquete etc.) ao criar uma partida.</li>
-            <li>Exclusão de conta direto no app, sem precisar abrir chamado.</li>
-            <li>Correções de bugs: redirecionamento de login, tela de criar partida e ordem das mensagens no chat.</li>
+            <li><strong>Ranking e Modo Competitivo (2x2)</strong>: disputa de placar com confirmação de ambos os times e estatísticas por esporte/nível/cidade.</li>
+            <li><strong>Histórico pessoal de jogos</strong>: acompanhe suas vitórias, empates e derrotas.</li>
+            <li><strong>Login com Google</strong> e nomes de times personalizáveis.</li>
+            <li>Botão para compartilhar partida em redes sociais e apps de mensagem.</li>
           </ul>
         </div>
 
         <div class="card version-card">
           <div class="version-card-head">
-            <span class="chip chip-soft">v0.1.0 · lançamento do beta</span>
+            <span class="chip chip-soft">v0.4.0 – v0.5.0</span>
           </div>
-          <h3>Primeira versão: perfil, proximidade, chat e confiabilidade</h3>
+          <h3>Times, Placar ao Vivo e Notificações In-App</h3>
           <ul class="update-list">
-            <li>Perfil com esportes e nível preferido, disponibilidade por dia/horário e localização.</li>
-            <li>Busca de partidas perto de você.</li>
-            <li>Chat em tempo real dentro de cada partida.</li>
-            <li>Confirmação de presença e avaliação de confiabilidade entre os participantes.</li>
-            <li>Sair ou cancelar uma partida, e redefinição de senha por e-mail.</li>
+            <li>Acompanhamento de placar em tempo real durante a partida em andamento.</li>
+            <li>Aba "Minhas Partidas" para acesso rápido às suas quadras organizadas ou confirmadas.</li>
+            <li>Notificações in-app com badge de mensagens não lidas.</li>
           </ul>
         </div>
       </div>
