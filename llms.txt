@@ -1,0 +1,17 @@
+# FechaJogo
+
+> FechaJogo é um aplicativo brasileiro (Android, em beta) para encontrar e fechar partidas de esportes de praia perto de você: futevôlei, vôlei de areia, beach tênis e padel. Substitui o grupo de WhatsApp que nunca fecha o jogo.
+
+## O que o app faz
+- Mostra partidas abertas perto da sua localização, com raio de busca ajustável (5 km a 100 km).
+- Permite criar a própria partida em segundos quando não há nenhuma disponível.
+- Chat da partida, notificações push, placar ao vivo, ranking e modo competitivo 2x2.
+- Pontuação de confiabilidade pública: após o jogo, os participantes confirmam quem realmente apareceu.
+- Localização só é usada quando o usuário pede; a conta e os dados podem ser apagados no app.
+
+## Links
+- [Site oficial](https://fechajogo.vercel.app/): apresentação, perguntas frequentes e notas de versão
+- [Política de privacidade](https://fechajogo.vercel.app/privacy.html)
+- [Beta no Google Play](https://play.google.com/apps/testing/com.fechajogo.app)
+- [Instagram](https://www.instagram.com/fechajogo/)
+- Contato: fechajogo@gmail.com
